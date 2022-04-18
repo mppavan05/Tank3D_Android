@@ -48,17 +48,13 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // store the player input and make sure the audio for the engine is playing.
-        m_MovementInputValue = Joystick (m_MovementAxisName);
+        m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
         m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
 
         EngineAudio();
     }
 
-    private float Joystick(string m_MovementAxisName)
-    {
-        throw new System.NotImplementedException();
-    }
-
+  
     private void EngineAudio()
     {
         // play the correct audio clip based on weather or not the tank is moving and what audio id current in use.

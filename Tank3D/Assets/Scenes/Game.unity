@@ -193,7 +193,7 @@ Canvas:
   m_GameObject: {fileID: 768285053}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1391056263}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 177.3
+      value: 177.29999
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
@@ -750,14 +750,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 964009242, guid: 6f4e8d6384af5ba4095a189d4496cfc0, type: 3}
-      propertyPath: m_Joystick
-      value: 
-      objectReference: {fileID: 1704964364}
     - target: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_Name
       value: Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022799758351262397, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
@@ -787,7 +793,7 @@ PrefabInstance:
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
@@ -797,7 +803,7 @@ PrefabInstance:
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
@@ -816,3 +822,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f4e8d6384af5ba4095a189d4496cfc0, type: 3}
+--- !u!1 &3022799758472116407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3022799758472116406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3022799758472116408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022799758472116407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4036540ea1e0342a24f58a7b871c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 90
+  speed: 1.08
+  joystick: {fileID: 1704964364}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTank : Tank<EnemyTank>
+public class EnemyTank : SingletonTank<EnemyTank>
 {
-
+    
 }

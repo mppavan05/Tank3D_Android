@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class TankScript : MonoBehaviour
 {
-    public Tankview _tankview;
+    public Tankview tankview;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(_tankview.gameObject, transform.position, Quaternion.identity);
-        
+        createTank();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void createTank()
     {
-        
+        TankModel tankmodel = new TankModel(10 , 50);
+        Tankcontroller tankcontroller = new Tankcontroller(tankview, tankmodel);
     }
+
 }

@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class Tankcontroller 
 {
-    private Tankview _Tankview;
-    private TankModle _Modle;
+    private Tankview tankview;
+    private TankModel tankmodel;
+    private Rigidbody rb;
 
-    public Tankcontroller(Tankview tankview)
+    public Tankcontroller(Tankview _tankview, TankModel _tankmodel)
     {
-        _Tankview = Object.Instantiate(tankview);
-        _Tankview.SetController(this);
-        _Modle = new TankModle();
-        _Modle.SetController(this);
+        tankmodel = _tankmodel;
+        tankview = GameObject.Instantiate<Tankview>(_tankview);
+        rb = tankview.GetRigidbody();
+
+
+        tankmodel.SetController(this);
+        tankview.SetController(this);
+
+        
     }
-    public void Movement()
+    public void Move(float movement, float movementSpeed) 
     {
         
+        rb.velocity = tankview.transform.forward * movement * movementSpeed;
+    }
 
+    public void rotate(float rotate, float rotateSpeed)
+    {
+        Vector3 vector = new Vector3(0f, rotate * rotateSpeed, 0f);
+        Quaternion deltaRotation = Quaternion.Euler(vector * Time.deltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
+    }
+
+    public TankModel GetTankModel()
+    {
+        return tankmodel;
     }
 
     public void Firing()

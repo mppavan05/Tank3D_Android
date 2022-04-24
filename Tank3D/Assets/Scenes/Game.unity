@@ -125,6 +125,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &760131585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 760131587}
+  - component: {fileID: 760131586}
+  m_Layer: 0
+  m_Name: Tankspwan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &760131586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760131585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bda71638ef38d4b883d05de6a315ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankview: {fileID: 5162676008510772448, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+    type: 3}
+--- !u!4 &760131587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760131585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768285053
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &768285054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,7 +647,7 @@ GameObject:
   - component: {fileID: 1391056260}
   - component: {fileID: 1391056265}
   m_Layer: 0
-  m_Name: qw
+  m_Name: MainCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,7 +803,7 @@ PrefabInstance:
     - target: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3022799758351262397, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
@@ -768,7 +813,7 @@ PrefabInstance:
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3022799758351661135, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
@@ -820,26 +865,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5162676008510772448, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+        type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 1704964364}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f4e8d6384af5ba4095a189d4496cfc0, type: 3}
---- !u!1 &3022799758472116407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 3022799758472116406}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3022799758472116408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022799758472116407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f4036540ea1e0342a24f58a7b871c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 90
-  speed: 1.08
-  joystick: {fileID: 1704964364}

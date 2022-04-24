@@ -17,7 +17,7 @@ public class Tankview : MonoBehaviour
         GameObject cam = GameObject.Find("MainCam");
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 3f,-4f);
-        cam.transform.rotation = new Quaternion(15f, 0f, 0f, rotation);
+        
     }
 
     // Update is called once per frame

@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankview: {fileID: 5162676008510772448, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
     type: 3}
+  tanklist: {fileID: 11400000, guid: d0f6de8ad0e0b194fb77b058c0c8a20b, type: 2}
 --- !u!4 &760131587
 Transform:
   m_ObjectHideFlags: 0
@@ -692,11 +693,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -6.19
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.25
+  orthographic size: 7.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -719,13 +720,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391056259}
-  m_LocalRotation: {x: 0.12628214, y: 0.54087126, z: -0.42771065, w: 0.7131443}
-  m_LocalPosition: {x: -43.2, y: 42, z: -24.9}
+  m_LocalRotation: {x: -0.056290172, y: 0.29545444, z: -0.15620728, w: 0.9408174}
+  m_LocalPosition: {x: 0, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1771596987}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: 60, z: -38.172}
+  m_LocalEulerAnglesHint: {x: -0.78, y: 35, z: -19.1}
 --- !u!114 &1391056265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +796,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 3022799758351164847, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
         type: 3}
       propertyPath: m_Name

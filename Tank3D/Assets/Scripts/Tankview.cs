@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Tankview : MonoBehaviour
 {
+    
     private Tankcontroller controller;
     private float movement;
     private float rotation;
 
+
     public Rigidbody rb;
+    public TankTypes types;
     
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,5 +66,4 @@ public class Tankview : MonoBehaviour
         return rb;
     }
 
-    
 }

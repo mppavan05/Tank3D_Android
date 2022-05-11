@@ -10,20 +10,11 @@ public class TankScritable : ScriptableObject
     public string TankName;
     public float Speed;
     public float rotationSpeed;
-    public float Health;
+    public float StartingHealth;
     public float Damage;
+    public string EnemyName;
+    
 }
 
-/* private datatype m_VariableName
- * public datatype variableName
- * 
- * enum TankTypes (plural)
- * 
- * TankTypes tankType
- * 
- * TankTypeSO
- * 
- * TankTypeSOList / TankTypeSOs
- * 
- */
+
 

@@ -16,5 +16,6 @@ MonoBehaviour:
   TankName: Blue Sky
   Speed: 1
   rotationSpeed: 200
-  Health: 120
-  Damage: 100
+  StartingHealth: 143.71
+  Damage: 67.76
+  EnemyName: name

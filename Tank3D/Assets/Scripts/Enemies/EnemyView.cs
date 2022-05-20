@@ -34,8 +34,8 @@ public class EnemyView : MonoBehaviour
 
     public Image HealthBar;
 
-    static PatrolingMode patrolingMode = new PatrolingMode();
-    static ChasingMode chasingMode = new ChasingMode();
+    //static PatrolingMode patrolingMode = new PatrolingMode();
+    //static ChasingMode chasingMode = new ChasingMode();
 
 
 
@@ -75,12 +75,12 @@ public class EnemyView : MonoBehaviour
 
         if (!controller.m_IsPatrol)
         {
-            chasingMode.Chasing();
+           // chasingMode.Chasing();
             Debug.Log("chasing");
         }
         else
         {
-            patrolingMode.Patroling();
+           // patrolingMode.Patroling();
             Debug.Log("patroling");
         }
 

@@ -157,8 +157,9 @@ MonoBehaviour:
   tankview: {fileID: 5162676008510772448, guid: 6f4e8d6384af5ba4095a189d4496cfc0,
     type: 3}
   tanklist: {fileID: 11400000, guid: d0f6de8ad0e0b194fb77b058c0c8a20b, type: 2}
-  enemyview: {fileID: 2285224910480598337, guid: 48a7c12ebf665c446877cb3926ad2cfa,
+  EnemyTankView: {fileID: 3353399272284434404, guid: 48a7c12ebf665c446877cb3926ad2cfa,
     type: 3}
+  numOfEnemies: 5
 --- !u!4 &760131587
 Transform:
   m_ObjectHideFlags: 0

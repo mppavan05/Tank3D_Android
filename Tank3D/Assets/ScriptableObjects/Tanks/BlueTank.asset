@@ -18,4 +18,9 @@ MonoBehaviour:
   rotationSpeed: 200
   StartingHealth: 143.71
   Damage: 67.76
-  EnemyName: name
+  EnemyName: Blue
+  minLaunchForce: 0
+  maxLaunchForce: 30
+  maxChargeTime: 0.75
+  currentLaunchForce: 0
+  chargeSpeed: 0

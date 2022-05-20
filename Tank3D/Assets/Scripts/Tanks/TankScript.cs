@@ -7,14 +7,16 @@ public class TankScript : MonoBehaviour
 {
     public Tankview tankview;
     public TankScritableList tanklist;
-    public EnemyView enemyview;
+    public Enemyview EnemyTankView;
+    public Enemymodel EnemyTankModel;
+    public int numOfEnemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numOfEnemies; i++)
         {
-           createEnemy(i);
+           createEnemy();
         }
         createTank();
     }
@@ -40,13 +42,15 @@ public class TankScript : MonoBehaviour
         return pos;
     }
 
-    private void createEnemy(int i)
+  
+    private Enemycontroller createEnemy()
     {
-        TankScritable tankScritable = tanklist.tanks[i];
-        EnemyModel enemyModle = new EnemyModel(tankScritable);
-        
-        EnemyController enemyController = new EnemyController(enemyModle, enemyview, RandomPosition());
-
+        int index = Random.Range(0, tanklist.tanks.Length);
+        TankScritable tankScriptableObject = tanklist.tanks[index];
+        //Debug.Log("Creating Tank with Type: " + tankScriptableObject.tankName);
+        EnemyTankModel = new Enemymodel(tankScriptableObject);
+        Enemycontroller enemyTank = new Enemycontroller(EnemyTankModel, EnemyTankView, RandomPosition());
+        return enemyTank;
     }
 
 }

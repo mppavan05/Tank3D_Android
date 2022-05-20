@@ -18,4 +18,9 @@ MonoBehaviour:
   rotationSpeed: 109.64
   StartingHealth: 136
   Damage: 120
-  EnemyName: name
+  EnemyName: Green
+  minLaunchForce: 0
+  maxLaunchForce: 30
+  maxChargeTime: 0.75
+  currentLaunchForce: 0
+  chargeSpeed: 0

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyController
+public class EnemyController : TankStateController
 {
     
-    private EnemyView enemyview;
-    private EnemyModel enemymodle;
+    public EnemyView enemyview;
+    public EnemyModel enemymodle;
+    public TankStateController tankstatecontroller;
     public bool m_Fired;
     public float m_CurrentLaunchForce;
 
@@ -16,23 +17,29 @@ public class EnemyController
         return enemymodle;
     }
 
-    public EnemyController(EnemyModel _enemymodel, EnemyView _enemyview)
+   
+
+
+
+    public EnemyController(EnemyModel _enemymodel, EnemyView _enemyview, Vector3 spawnPlayer)
     {
         enemymodle = _enemymodel;
         enemyview = _enemyview;
+        
 
-        if(enemymodle != null)
+        if (enemymodle != null)
         {
             enemyview = GameObject.Instantiate<EnemyView>(_enemyview);
         }
-        
 
+        _enemyview.transform.position = spawnPlayer;
         enemyview.SetEnemyController(this);
         enemymodle.SetEnemyController(this);
+        tankstatecontroller.SetEnemyController(this);
         
     }
+
     
-  
 
     public Vector3 playerLastPosition = Vector3.zero;
     public Vector3 m_playerPosition;
@@ -45,49 +52,51 @@ public class EnemyController
     public bool m_IsPatrol;
     public bool m_CaughPlayer;
 
+
+
+
+
+
    
-    
-
-
-
-   
-    public void Chasing()
-    {
-        
-        m_PlayerNear = false;
-        playerLastPosition = Vector3.zero;
-
-        if (!m_CaughPlayer)
+       /*public void Chasing()
         {
-            
-            Move(enemymodle.speedRun);
-            enemyview.navMeshAgent.SetDestination(m_playerPosition);
-            
-        }
-        if (enemyview.navMeshAgent.remainingDistance <= enemyview.navMeshAgent.stoppingDistance)
-        {
-            
-            if (m_WaitTime <= 0 && !m_CaughPlayer && Vector3.Distance(enemyview.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
+
+
+            m_PlayerNear = false;
+            playerLastPosition = Vector3.zero;
+
+            if (!m_CaughPlayer)
             {
-                
-                m_IsPatrol = true;
-                m_PlayerNear = false;
-                Move(enemymodle.speedWalk);
-                m_TimeToRotate = enemymodle.timeToRotate;
-                m_WaitTime = enemymodle.startWaitTime;
-                enemyview.navMeshAgent.SetDestination(enemyview.waypoints[enemyview.m_CurrentWayPointIndex].position);
+
+                Move(enemymodle.speedRun);
+                enemyview.navMeshAgent.SetDestination(m_playerPosition);
+
             }
-            else
+            if (enemyview.navMeshAgent.remainingDistance <= enemyview.navMeshAgent.stoppingDistance)
             {
-                if (Vector3.Distance(enemyview.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+
+                if (m_WaitTime <= 0 && !m_CaughPlayer && Vector3.Distance(enemyview.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
                 {
-                    
-                    Stop();
-                    m_WaitTime -= Time.deltaTime;
+
+                    m_IsPatrol = true;
+                    m_PlayerNear = false;
+                    Move(enemymodle.speedWalk);
+                    m_TimeToRotate = enemymodle.timeToRotate;
+                    m_WaitTime = enemymodle.startWaitTime;
+                    enemyview.navMeshAgent.SetDestination(enemyview.waypoints[enemyview.m_CurrentWayPointIndex].position);
+                }
+                else
+                {
+                    if (Vector3.Distance(enemyview.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                    {
+
+                        Stop();
+                        m_WaitTime -= Time.deltaTime;
+                    }
                 }
             }
-        }
-    }
+        }*/
+    
 
 
     public void NextPoint()
@@ -97,8 +106,9 @@ public class EnemyController
     }
 
 
-    public void Patroling()
+    /*public void Patroling()
     {
+        
         
         if (m_PlayerNear)
         {
@@ -133,15 +143,15 @@ public class EnemyController
                 }
             }
         }
-    }
+    }*/
 
-    void Move(float speed)
+    public void Move(float speed)
     {
         enemyview.navMeshAgent.isStopped = false;
         enemyview.navMeshAgent.speed = speed;
     }
 
-    void Stop()
+    public void Stop()
     {
         enemyview.navMeshAgent.isStopped = true;
         enemyview.navMeshAgent.speed = 0;
@@ -154,7 +164,7 @@ public class EnemyController
         m_CaughPlayer = true;
     }
 
-    void lookingPlayer(Vector3 player)
+    public void lookingPlayer(Vector3 player)
     {
         
         enemyview.navMeshAgent.SetDestination(player);
@@ -212,7 +222,7 @@ public class EnemyController
                 m_playerPosition = player.transform.position;
             }
         }
-
+        Debug.Log(m_IsPatrol);
     }
 
 

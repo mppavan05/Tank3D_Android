@@ -26,13 +26,26 @@ public class TankScript : MonoBehaviour
         TankModel tankmodel = new TankModel(tankScritable);
         Tankcontroller tankcontroller = new Tankcontroller(tankview, tankmodel);
         
+        
+    }
+
+    Vector3 RandomPosition()
+    {
+        float x, y, z;
+        Vector3 pos;
+        x = Random.Range(-35, 35);
+        y = 1;
+        z = Random.Range(-20, 30);
+        pos = new Vector3(x, y, z);
+        return pos;
     }
 
     private void createEnemy(int i)
     {
         TankScritable tankScritable = tanklist.tanks[i];
         EnemyModel enemyModle = new EnemyModel(tankScritable);
-        EnemyController enemyController = new EnemyController(enemyModle, enemyview);
+        
+        EnemyController enemyController = new EnemyController(enemyModle, enemyview, RandomPosition());
 
     }
 

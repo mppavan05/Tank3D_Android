@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+
 public class EnemyView : MonoBehaviour
 {
     private EnemyController controller;
@@ -11,14 +12,17 @@ public class EnemyView : MonoBehaviour
     public Transform m_FireTransform;
     public AudioSource m_ShootingAudio;
     public AudioClip m_FireClip;
+    private Chase chase;
+    private TankStateController controllerState;
 
     private float m_CurrentHealth;
     private bool m_Dead;
     public float m_StartingHealth = 100f;
-    float lerpSpeed;
+    public float lerpSpeed;
     public AudioSource m_ExplosionAudio;               // The audio source to play when the tank explodes.
     public ParticleSystem m_ExplosionParticles;
-    
+    public GameObject m_ExplosionPrefab;
+
 
     public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
    
@@ -30,6 +34,11 @@ public class EnemyView : MonoBehaviour
 
     public Image HealthBar;
 
+    static PatrolingMode patrolingMode = new PatrolingMode();
+    static ChasingMode chasingMode = new ChasingMode();
+
+
+
 
     void Start()
     {
@@ -39,7 +48,7 @@ public class EnemyView : MonoBehaviour
         controller.m_playerInRange = false;
         controller.m_PlayerNear = false;
 
-        m_ExplosionParticles = GetComponent<ParticleSystem>();
+        //m_ExplosionParticles = GetComponent<ParticleSystem>();
         controller.m_WaitTime = controller.GetEnemyModle().startWaitTime;               //  Set the wait time variable that will change
 
         controller.m_TimeToRotate = controller.GetEnemyModle().timeToRotate;
@@ -50,6 +59,14 @@ public class EnemyView : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = controller.GetEnemyModle().speedWalk;             //  Set the navemesh speed with the normal speed of the enemy
         navMeshAgent.SetDestination(waypoints[m_CurrentWayPointIndex].position);    //  Set the destination to the first waypoint
+        
+    }
+
+    private void Awake()
+    {
+        m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
+        m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
+        m_ExplosionParticles.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -58,11 +75,13 @@ public class EnemyView : MonoBehaviour
 
         if (!controller.m_IsPatrol)
         {
-            controller.Chasing();
+            chasingMode.Chasing();
+            Debug.Log("chasing");
         }
         else
         {
-            controller.Patroling();
+            patrolingMode.Patroling();
+            Debug.Log("patroling");
         }
 
         lerpSpeed = 3f * Time.deltaTime;
@@ -85,7 +104,7 @@ public class EnemyView : MonoBehaviour
         SetHealthUI();
     }
 
-    private void SetHealthUI()
+    public void SetHealthUI()
     {
         HealthBar.fillAmount = Mathf.Lerp(HealthBar.fillAmount, m_CurrentHealth / m_StartingHealth, lerpSpeed);
         Color HealthColor = Color.Lerp(Color.red, Color.green, (m_CurrentHealth / m_StartingHealth));
@@ -121,19 +140,19 @@ public class EnemyView : MonoBehaviour
         Debug.Log("explossion");
 
         // Play the tank explosion sound effect.
-        
 
-        StartCoroutine(wait());
-        
+
+        //StartCoroutine(wait());
+        m_ExplosionAudio.Play();
         // Turn the tank off.
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
         
 
     }
 
-    IEnumerator wait()
+    /*IEnumerator wait()
     {
         yield return new WaitForSeconds(3);
 
@@ -143,7 +162,13 @@ public class EnemyView : MonoBehaviour
 
         Destroy(gameObject);
 
-    }
+    }*/
+
+
+
+
+
+
 
 
 

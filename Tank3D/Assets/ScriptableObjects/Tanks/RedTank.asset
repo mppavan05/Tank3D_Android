@@ -15,6 +15,12 @@ MonoBehaviour:
   tankType: 1
   TankName: Red One
   Speed: 20
-  rotationSpeed: 20
-  Health: 100
-  Damage: 100
+  rotationSpeed: 50.1
+  StartingHealth: 98.88
+  Damage: 111.5
+  EnemyName: Red
+  minLaunchForce: 24
+  maxLaunchForce: 30
+  maxChargeTime: 0.75
+  currentLaunchForce: 28
+  chargeSpeed: 30

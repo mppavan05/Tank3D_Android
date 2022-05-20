@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankType: 3
   TankName: Green WIn
-  Speed: 20
-  rotationSpeed: 20
-  Health: 120
+  Speed: 22.7
+  rotationSpeed: 109.64
+  StartingHealth: 136
   Damage: 120
+  EnemyName: Green
+  minLaunchForce: 0
+  maxLaunchForce: 30
+  maxChargeTime: 0.75
+  currentLaunchForce: 0
+  chargeSpeed: 0

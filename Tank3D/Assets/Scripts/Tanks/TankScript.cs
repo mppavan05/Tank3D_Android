@@ -7,14 +7,16 @@ public class TankScript : MonoBehaviour
 {
     public Tankview tankview;
     public TankScritableList tanklist;
-    public EnemyView enemyview;
+    public Enemyview EnemyTankView;
+    public Enemymodel EnemyTankModel;
+    public int numOfEnemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numOfEnemies; i++)
         {
-           createEnemy(i);
+           createEnemy();
         }
         createTank();
     }
@@ -26,14 +28,33 @@ public class TankScript : MonoBehaviour
         TankModel tankmodel = new TankModel(tankScritable);
         Tankcontroller tankcontroller = new Tankcontroller(tankview, tankmodel);
         
+        
     }
 
-    private void createEnemy(int i)
+    Vector3 RandomPosition()
     {
-        TankScritable tankScritable = tanklist.tanks[i];
-        EnemyModel enemyModle = new EnemyModel(tankScritable);
-        EnemyController enemyController = new EnemyController(enemyModle, enemyview);
-
+        float x, y, z;
+        Vector3 pos;
+        x = Random.Range(-35, 35);
+        y = 1;
+        z = Random.Range(-20, 30);
+        pos = new Vector3(x, y, z);
+        return pos;
     }
 
+  
+    private Enemycontroller createEnemy()
+    {
+        int index = Random.Range(0, tanklist.tanks.Length);
+        TankScritable tankScriptableObject = tanklist.tanks[index];
+        //Debug.Log("Creating Tank with Type: " + tankScriptableObject.tankName);
+        EnemyTankModel = new Enemymodel(tankScriptableObject);
+        Enemycontroller enemyTank = new Enemycontroller(EnemyTankModel, EnemyTankView, RandomPosition());
+        return enemyTank;
+    }
+
+    internal System.Action GetTextEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

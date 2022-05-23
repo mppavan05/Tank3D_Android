@@ -7,6 +7,7 @@ public class Tankview : MonoBehaviour
 {
 
     private Tankcontroller controller;
+    private TextScript script;
     private float movement;// na
     private float rotation;//na
     public AudioSource m_ExplosionAudio;               // The audio source to play when the tank explodes.
@@ -82,6 +83,7 @@ public class Tankview : MonoBehaviour
         {
             controller.m_CurrentLaunchForce = controller.GetTankModel().m_MaxLaunchForce;
             controller.Fire(m_Shell, m_FireTransform);
+            
         }
         else if (Input.GetButtonDown(m_FireButton))
         {
@@ -98,6 +100,8 @@ public class Tankview : MonoBehaviour
         else if (Input.GetButtonUp(m_FireButton) )// && controller!.m_Fired)
         {
             controller.Fire(m_Shell,m_FireTransform);
+            
+            
         }
 
         lerpSpeed = 3f * Time.deltaTime;
@@ -106,8 +110,7 @@ public class Tankview : MonoBehaviour
         
     }
 
-   
-
+    
     private void Movement()
     {
         movement = Input.GetAxis("VerticalUI");

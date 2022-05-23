@@ -13,7 +13,13 @@ public class TankScritable : ScriptableObject
     public float StartingHealth;
     public float Damage;
     public string EnemyName;
-    
+    public float minLaunchForce;// = 15f;
+    public float maxLaunchForce = 30f;
+    public float maxChargeTime = 0.75f;
+
+    public float currentLaunchForce;
+    public float chargeSpeed;
+
 }
 
 

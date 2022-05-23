@@ -53,4 +53,8 @@ public class TankScript : MonoBehaviour
         return enemyTank;
     }
 
+    internal System.Action GetTextEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

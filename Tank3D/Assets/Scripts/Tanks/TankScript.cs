@@ -10,6 +10,10 @@ public class TankScript : MonoBehaviour
     public Enemyview EnemyTankView;
     public Enemymodel EnemyTankModel;
     public int numOfEnemies;
+    private CameraController m_Camera;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,7 @@ public class TankScript : MonoBehaviour
            createEnemy();
         }
         createTank();
+        m_Camera = FindObjectOfType<CameraController>();
     }
 
     private void createTank()
@@ -53,8 +58,13 @@ public class TankScript : MonoBehaviour
         return enemyTank;
     }
 
-    internal System.Action GetTextEvent()
+  public void GetZooming()
     {
-        throw new System.NotImplementedException();
+        StartCoroutine(m_Camera.ZoomOutCamera());
+        StartCoroutine(m_Camera.destroyEverything());
+
     }
+
+
+
 }

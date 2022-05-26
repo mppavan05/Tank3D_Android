@@ -10,6 +10,7 @@ public class Tankcontroller
     private float m_ChargeSpeed;
     public bool m_Fired;
     public float m_CurrentLaunchForce;
+    //public ObjectPool objectPool;
     //-------------------------------------------------------------------//
     //Enemey movement & AI
     
@@ -64,19 +65,26 @@ public class Tankcontroller
         fireDetails = tankmodel.GetFireDetails();
         m_ChargeSpeed = (fireDetails[1] - fireDetails[0]) / fireDetails[2];
         return m_ChargeSpeed;
+        
     }
 
 
     public void Fire(Rigidbody m_Shell, Transform m_FireTransform)
     {
+        
         // Set the fired flag so only Fire is only called once.
         m_Fired = true;
 
         // Create an instance of the shell and store a reference to it's rigidbody.
         Rigidbody shellInstance = Object.Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-
+        //shellInstance = tankview.objectPool.GetpooledObject();
+        
+        // GameObject newBullet = tankview.objectPool.GetpooledObject();
+        //newBullet.transform.position = m_FireTransform.position;
+        ////Rigidbody Bullet = newBullet.gameObject.Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
         // Set the shell's velocity to the launch force in the fire position's forward direction.
-        shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward; ;
+        shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
+        ////Bullet.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 
         // Change the clip to the firing clip and play it.
         tankview.m_ShootingAudio.clip = tankview.m_FireClip;
@@ -88,13 +96,5 @@ public class Tankcontroller
 
 
 
-
-
-
-    // -------------------------Enemy controller-----------------------------//
-
-   
-
-
-}
+ }
 

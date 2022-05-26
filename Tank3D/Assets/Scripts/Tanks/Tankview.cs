@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Tankview : MonoBehaviour
 {
 
     private Tankcontroller controller;
+    public Transform Tower;
     private TextScript script;
     private float movement;// na
     private float rotation;//na
@@ -15,16 +17,16 @@ public class Tankview : MonoBehaviour
     private float m_CurrentHealth;   //na                   // How much health the tank currently has.
     private bool m_Dead;//na
     private string m_FireButton;  //na              // The input axis that is used for launching shells.
-  
+
     private int m_PlayerNumber = 1;              // Used to identify the different players.
 
     public Rigidbody rb;
     public TankTypes types;// na
 
     public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
-   
+
     public Image HealthBar;
-   
+
     float lerpSpeed;
     public GameObject m_ExplosionPrefab;
     public Rigidbody m_Shell;                   // Prefab of the shell.
@@ -33,16 +35,22 @@ public class Tankview : MonoBehaviour
     public AudioSource m_ShootingAudio;         // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
     public AudioClip m_ChargingClip;            // Audio that plays when each shot is charging up.
     public AudioClip m_FireClip;                // Audio that plays when each shot is fired.
-
-
-
+    public ObjectPool objectPool;
+    private CameraController m_Camera;
+    public float towerSpeed;
+    float towerAngle;
+    public TankScript Script;
     
+
+    public GameObject[] _enemytank;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject cam = GameObject.Find("MainCam");
+        /*GameObject cam = GameObject.Find("MainCam");
         cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(0f, 3f, -4f);
+        cam.transform.position = new Vector3(0f, 3f, -4f);*/
 
         // The fire axis is based on the player number.
         m_FireButton = "Fire" + m_PlayerNumber;
@@ -50,7 +58,8 @@ public class Tankview : MonoBehaviour
         // The rate that the launch force charges up is the range of possible forces by the max charge time.
         //m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
         controller.CalculateChargeSpeed();
-        
+        objectPool = FindObjectOfType<ObjectPool>();
+        Script = FindObjectOfType<TankScript>();
 
     }
     private void OnEnable()
@@ -61,7 +70,7 @@ public class Tankview : MonoBehaviour
         // Update the health slider's value and color.
         SetHealthUI();
         // When the tank is turned on, reset the launch force and the UI
-        
+
         //controller.m_CurrentLaunchForce = controller.GetTankModel().m_MinLaunchForce;
         //m_AimSlider.value = controller.GetTankModel().m_MinLaunchForce;
 
@@ -70,6 +79,7 @@ public class Tankview : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RotateTower();
         Movement();
 
         if (movement != 0)
@@ -83,7 +93,7 @@ public class Tankview : MonoBehaviour
         {
             controller.m_CurrentLaunchForce = controller.GetTankModel().m_MaxLaunchForce;
             controller.Fire(m_Shell, m_FireTransform);
-            
+
         }
         else if (Input.GetButtonDown(m_FireButton))
         {
@@ -92,25 +102,31 @@ public class Tankview : MonoBehaviour
             m_ShootingAudio.clip = m_ChargingClip;
             m_ShootingAudio.Play();
         }
-        else if (Input.GetButton(m_FireButton) )//&& controller!.m_Fired)
+        else if (Input.GetButton(m_FireButton))//&& controller!.m_Fired)
         {
             controller.m_CurrentLaunchForce += controller.CalculateChargeSpeed() * Time.deltaTime;
             m_AimSlider.value = controller.m_CurrentLaunchForce;
         }
-        else if (Input.GetButtonUp(m_FireButton) )// && controller!.m_Fired)
+        else if (Input.GetButtonUp(m_FireButton))// && controller!.m_Fired)
         {
-            controller.Fire(m_Shell,m_FireTransform);
-            
-            
+            controller.Fire(m_Shell, m_FireTransform);
+
+        }
+        else if (Input.GetKey(KeyCode.R))
+        {
+            //objectPool.ReturnBulletprf(this.gameObject);
+            Debug.Log("Reloding");
         }
 
         lerpSpeed = 3f * Time.deltaTime;
 
         SetHealthUI();
-        
+
+
+
     }
 
-    
+
     private void Movement()
     {
         movement = Input.GetAxis("VerticalUI");
@@ -127,6 +143,20 @@ public class Tankview : MonoBehaviour
     {
         return rb;
     }
+
+
+    void RotateTower()
+    {
+        if(Input.GetMouseButton(1))
+        {
+            towerAngle += Input.GetAxis("Mouse X") * towerSpeed * -Time.deltaTime;
+            towerAngle = Mathf.Clamp(towerAngle, 0, 360);
+            Tower.localRotation = Quaternion.AngleAxis(towerAngle, Vector3.up);
+
+        }
+    }
+
+
 
 
     private void Awake()
@@ -146,26 +176,33 @@ public class Tankview : MonoBehaviour
 
         if (m_CurrentHealth <= 0f && !m_Dead)
         {
-            OnDeath();
+
+            //StartCoroutine(m_Camera.ZoomOutCamera());
+            //StartCoroutine(m_Camera.destroyEverything());
+            
+            // OnDeath();
+            GameObject.Destroy(gameObject);
+
+            Script.GetZooming();
         }
     }
 
 
     private void SetHealthUI()
-    { 
+    {
         HealthBar.fillAmount = Mathf.Lerp(HealthBar.fillAmount, m_CurrentHealth / m_StartingHealth, lerpSpeed);
-        Color HealthColor = Color.Lerp(Color.red , Color.green, (m_CurrentHealth/ m_StartingHealth));
+        Color HealthColor = Color.Lerp(Color.red, Color.green, (m_CurrentHealth / m_StartingHealth));
         HealthBar.color = HealthColor;
     }
 
 
 
-  
+
 
 
     private void OnDeath()
     {
-       
+
         m_Dead = true;
         m_ExplosionParticles.transform.position = transform.position;
         m_ExplosionParticles.gameObject.SetActive(true);
@@ -180,16 +217,18 @@ public class Tankview : MonoBehaviour
         gameObject.SetActive(false);
 
         Destroy(gameObject);
-        
+
     }
 
 
-
-
-    
-
-
-
-
+   /*public IEnumerator destroyEverything()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Ground");
+        for (int i = 0; i < objects.Length; i++)
+        {
+            GameObject.Destroy(objects[i]);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }*/
 
 }

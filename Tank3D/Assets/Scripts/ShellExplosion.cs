@@ -11,12 +11,13 @@ public class ShellExplosion : MonoBehaviour
     public float m_ExplosionForce = 1000f;              // The amount of force added to a tank at the centre of the explosion.
     public float m_MaxLifeTime = 2f;                    // The time in seconds before the shell is removed.
     public float m_ExplosionRadius = 5f;                // The maximum distance away from the explosion tanks can be and are still affected.
-
+    private ObjectPool ObjectPool;
 
     private void Start()
     {
         // If it isn't destroyed by then, destroy the shell after it's lifetime.
         Destroy(gameObject, m_MaxLifeTime);
+        ObjectPool = FindObjectOfType<ObjectPool>();
     }
 
     [System.Obsolete]
@@ -28,6 +29,7 @@ public class ShellExplosion : MonoBehaviour
         // Go through all the colliders...
         for (int i = 0; i < colliders.Length; i++)
         {
+            
             // ... and find their rigidbody.
             Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
 
@@ -55,7 +57,7 @@ public class ShellExplosion : MonoBehaviour
             targetHealth.TakeDamage(damage);
             
         }
-
+        
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
 
@@ -69,7 +71,10 @@ public class ShellExplosion : MonoBehaviour
         Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
 
         // Destroy the shell.
-        Destroy(gameObject);
+       // Destroy(gameObject);
+        gameObject.SetActive(false);
+        //ObjectPool.ReturnBulletprf(this.gameObject);
+
     }
 
 

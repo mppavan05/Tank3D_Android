@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
         playerTank = FindObjectOfType<CameraController>().transform;
         GameObject cam = GameObject.Find("MainCam");
         cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(0f, 3f, -4f);
+        cam.transform.position = new Vector3(4, 5 , -9);
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
         {
             camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, 60, lerp);
             lerp = lerp + CameraZoomOutSpeed;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
